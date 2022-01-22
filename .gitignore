@@ -1,0 +1,47 @@
+# ignore all WordPress folders
+wp-admin
+wp-includes
+wp-content/plugins/*
+wp-content/themes/*
+wp-content/uploads
+wp-content/cache
+wp-content/index.php
+
+# ignore all files in root
+/*.*
+
+# npm e composer
+node_modules
+.cache
+/vendor
+wp-content/themes/theme-project/vendor/
+wp-content/themes/theme-project/dist/
+
+# ignore log files and databases
+.phpintel
+.htaccess
+.DS_Store
+*.log
+*.sql
+*.sqlite
+*.zip
+*.tgz
+*.gz
+*.tar
+*.tar.gz
+*.lock
+
+# files to keep
+!.gitignore
+!.gitlab-ci.yml
+!README.md
+!composer.json
+!composer.lock
+
+# themes to keep
+# Uncomment to keep these theme
+!wp-content/themes/theme-project
+
+# plugins to keep
+!wp-content/plugins/advanced-custom-fields-pro
+!wp-content/plugins/replace-uploads-url

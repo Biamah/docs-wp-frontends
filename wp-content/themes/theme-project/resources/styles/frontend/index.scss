@@ -1,0 +1,33 @@
+/* ------------------------------------------------------------ *\
+    Customization
+\* ------------------------------------------------------------ */
+
+@import './functions';
+@import '~@styles/frontend.config';
+@import './variables';
+
+/* ------------------------------------------------------------ *\
+    Vendor
+\* ------------------------------------------------------------ */
+
+@import './vendor/index';
+
+/* ------------------------------------------------------------ *\
+    Settings
+\* ------------------------------------------------------------ */
+
+@import '~@styles/shared/variables';
+@import '~@styles/shared/editor';
+@import './sprite';
+
+/* ------------------------------------------------------------ *\
+    Theme
+\* ------------------------------------------------------------ */
+
+@import './mixins/index';
+@import './placeholders/index';
+@import './generic/index';
+@import './components/index';
+@import './blocks/index';
+@import './sections/index';
+@import './pages/index';

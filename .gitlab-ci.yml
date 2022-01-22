@@ -1,0 +1,69 @@
+image: linuxsolutions/deploy:version-1.0.2
+
+stages:
+  - build
+  - install
+  - deploy
+  
+variables:
+  project: theme-project #Name project and theme
+
+before_script:
+  - mkdir -p ~/.ssh
+  - echo -e "$SSH_KEY_HOMOLOG" > ~/.ssh/id_rsa
+  - chmod 600  ~/.ssh/id_rsa
+  - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+PrepareProjectTheme:
+  stage: build
+  cache:
+    key: "theme-$CI_COMMIT_REF_SLUG"
+    untracked: true
+    paths:
+      - wp-content/themes/${project}/vendor/
+      - wp-content/themes/${project}/dist/
+      - wp-content/themes/${project}/node_modules/
+    policy: pull-push
+  artifacts:
+    paths:
+      - wp-content/themes/${project}
+    expire_in: 30 mins
+  before_script:
+    - cd wp-content/themes/${project}
+  script:
+    - cp config.json.dist config.json
+    - composer install
+    - yarn install
+    - yarn build
+  only:
+    - homolog
+    - master
+
+PrepareProject:
+  stage: install
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    untracked: true
+    paths:
+      - vendor/
+    policy: pull-push
+  artifacts:
+    paths:
+      - ./
+    expire_in: 30 mins
+  script:
+    - composer install --no-interaction --optimize-autoloader --no-dev
+  only:
+    - homolog
+    - master
+
+deploy to Homolog:
+  stage: deploy
+  script:
+    - rm -rf .git* composer.* license.txt readme.html wp-config-sample.php wp-admin/install.php
+    - rsync -ahrvz --exclude='.git/' --exclude='.gitlab-ci.yml' --exclude='.gitignore' --exclude='wp-content/' --chmod="D755,F644" --chown=www-data:www-data -e "ssh -oStrictHostKeyChecking=no " --rsync-path="sudo rsync" ./ debian@147.135.64.165:/home/developer/data/${project}.fuerzastudio.com/htdocs
+    - rsync -ahrvz --delete-excluded --exclude='.git/' --exclude='.gitlab-ci.yml' --exclude='.gitignore' --chmod="D755,F644" --chown=www-data:www-data -e "ssh -oStrictHostKeyChecking=no " --rsync-path="sudo rsync" ./wp-content/themes/* debian@147.135.64.165:/home/developer/data/${project}.fuerzastudio.com/htdocs/wp-content/themes/
+    - rsync -ahrvz --delete-excluded --exclude='.git/' --exclude='.gitlab-ci.yml' --exclude='.gitignore' --chmod="D755,F644" --chown=www-data:www-data -e "ssh -oStrictHostKeyChecking=no " --rsync-path="sudo rsync" ./wp-content/plugins/* debian@147.135.64.165:/home/developer/data/${project}.fuerzastudio.com/htdocs/wp-content/plugins/
+    - ssh debian@147.135.64.165 "sudo chown -R www-data:www-data /home/developer/data/${project}.fuerzastudio.com/htdocs"
+  only:
+    - homolog
