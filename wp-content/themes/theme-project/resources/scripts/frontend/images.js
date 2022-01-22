@@ -1,1 +1,0 @@
-import '@images/favicon.ico';

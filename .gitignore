@@ -14,8 +14,8 @@ wp-content/index.php
 node_modules
 .cache
 /vendor
-wp-content/themes/theme-project/vendor/
-wp-content/themes/theme-project/dist/
+wp-content/themes/ingenium/vendor/
+wp-content/themes/ingenium/dist/
 
 # ignore log files and databases
 .phpintel
@@ -40,7 +40,7 @@ wp-content/themes/theme-project/dist/
 
 # themes to keep
 # Uncomment to keep these theme
-!wp-content/themes/theme-project
+!wp-content/themes/ingenium
 
 # plugins to keep
 !wp-content/plugins/advanced-custom-fields-pro
