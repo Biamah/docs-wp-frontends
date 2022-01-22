@@ -1,18 +1,19 @@
 {
-  "extends": "stylelint-config-recommended-scss",
-  "plugins": [
-    "stylelint-order",
-    "stylelint-scss"
+  "extends": "stylelint-config-sass-guidelines",
+  "ignoreFiles": [
+    "resources/styles/*.config.scss",
+    "resources/styles/frontend/_sprite.scss"
   ],
   "rules": {
     "no-empty-source": null,
     "indentation": 2,
-    "order/order": [
-      "custom-properties",
-      "dollar-variables",
-      "declarations",
-      "rules",
-      "at-rules"
+    "max-nesting-depth": 3,
+    "selector-class-pattern": [
+      "^[a-z]([a-z0-9-]+)?(__([a-z0-9]+-?)+)?(--([a-z0-9]+-?)+){0,2}$",
+      {
+        "resolveNestedSelectors": true,
+        "message": "Selector should be written in lowercase with hyphens and underscores (selector-class-pattern)"
+      }
     ]
   }
 }
