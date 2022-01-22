@@ -46,6 +46,7 @@
     "include": [
       "app/",
       "dist/",
+	  "templates/",
       "languages/",
       "vendor/",
       "views/",
