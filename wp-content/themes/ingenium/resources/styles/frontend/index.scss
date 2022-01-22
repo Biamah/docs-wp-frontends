@@ -2,21 +2,21 @@
     Vendor
 \* ------------------------------------------------------------ */
 
-@import './vendor/*.scss';
+@import './vendor/*';
 
 /* ------------------------------------------------------------ *\
     Settings
 \* ------------------------------------------------------------ */
 
-@import '~@styles/frontend.config.scss';
-@import '~@styles/shared/_variables.scss';
-@import '~@styles/shared/_editor.scss';
-@import './_variables.scss';
-@import './_sprite.scss';
+@import '~@styles/frontend.config';
+@import '~@styles/shared/variables';
+@import '~@styles/shared/editor';
+@import './variables';
+@import './sprite';
 
 /* ------------------------------------------------------------ *\
     Theme
 \* ------------------------------------------------------------ */
 
 @import '~@styles/editor';
-@import './_generic*.scss';
+@import './generic*';

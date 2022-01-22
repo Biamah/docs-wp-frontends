@@ -3,7 +3,8 @@
     "node": ">=12"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack --colors --config resources/build/webpack.development.js",
+    "start": "run-p start:core lint-watch",
+    "start:core": "cross-env NODE_ENV=development webpack --colors --config resources/build/webpack.development.js",
     "hot": "cross-env NODE_ENV=development WPEMERGE_ENV=hot webpack-dev-server --colors --config resources/build/webpack.development.js",
     "build": "cross-env WPEMERGE_COMBINED_BUILD=1 run-s -l build:debug build:production",
     "build:debug": "cross-env NODE_ENV=production WPEMERGE_ENV=debug webpack --colors --config resources/build/webpack.production.js",
@@ -16,13 +17,17 @@
     "lint-fix:wpcs": "./vendor/bin/phpcbf --colors --standard=phpcs.xml ./",
     "lint-fix:scripts": "eslint --color --fix ./resources/scripts/**",
     "lint-fix:styles": "stylelint --color --fix ./resources/styles/**",
+    "lint-watch:wpcs": "chokidar \"**/*.php\" -i \"app/src/**/*.php\" -c \"npm run lint:wpcs --silent\"",
+    "lint-watch:scripts": "chokidar \"resources/scripts/**/*.js\" -c \"npm run lint:scripts --silent\"",
+    "lint-watch:styles": "chokidar \"resources/styles/**/*.scss\" -c \"npm run lint:styles --silent\"",
+    "lint-watch": "run-p lint-watch:wpcs lint-watch:scripts lint-watch:styles",
     "i18n": "run-s -cl i18n:textdomain i18n:pot",
     "i18n:textdomain": "wpi18n addtextdomain --exclude=dist,node_modules,resources,tests,vendor --textdomain=my_app",
     "i18n:pot": "wpi18n makepot --exclude=dist,node_modules,resources,tests,vendor --type=wp-theme --main-file=style.css --domain-path=languages/ --pot-file=my_app.pot --textdomain=my_app",
     "rebrand": "node resources/build/rebrand/rebrand.js",
     "release": "run-s build release:zip",
     "release:zip": "node resources/build/release/release.js wpemerge-release",
-    "husky:install": "cd ../../.. && husky install wp-content/themes/ingenium/.husky"
+    "postinstall": "cd ../../.. && husky install wp-content/themes/ingenium/.husky"
   },
   "browserslist": [
     "last 3 versions"
@@ -62,6 +67,7 @@
     "archiver": "^4.0.1",
     "chalk": "^4.0.0",
     "change-case": "^4.1.1",
+    "chokidar-cli": "^3.0.0",
     "commitizen": "^4.2.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
@@ -75,9 +81,7 @@
     "replace-in-file": "^6.0.0",
     "shelljs": "^0.8.3",
     "stylelint": "^13.3.3",
-    "stylelint-config-recommended-scss": "^4.2.0",
-    "stylelint-order": "^4.0.0",
-    "stylelint-scss": "^3.17.1",
+    "stylelint-config-sass-guidelines": "^8.0.0",
     "webpack-dev-server": "^3.10.3"
   },
   "config": {
