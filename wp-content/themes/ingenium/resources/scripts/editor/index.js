@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import config from '@config';
 import '@styles/editor';
+// import config from '@config';
 
 // Your code goes here ...
