@@ -1,7 +1,0 @@
-{
-  "recommendations": [
-    // Linters
-    "dbaeumer.vscode-eslint",
-    "stylelint.vscode-stylelint",
-  ]
-}
