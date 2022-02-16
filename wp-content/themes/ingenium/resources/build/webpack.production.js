@@ -5,7 +5,7 @@ const { ProvidePlugin, WatchIgnorePlugin } = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const ManifestPlugin = require('webpack-assets-manifest');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 /**
  * The internal dependencies.
@@ -90,7 +90,7 @@ const plugins = [
 ];
 
 // When doing a combined build, only clean up the first time.
-if (env.isCombined && env.isDebug) {
+if (process.env.WPEMERGE_COMBINED_BUILD && env.isDebug) {
   plugins.push(new CleanWebpackPlugin(utils.distPath(), {
     root: utils.rootPath(),
   }));
@@ -185,14 +185,11 @@ module.exports = {
        */
       {
         test: utils.tests.images,
-        exclude: [
-          utils.srcImagesPath('sprite-svg'),
-        ],
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: utils.filehashFilter,
+              name: file => `[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
               outputPath: 'images',
             },
           },
@@ -203,10 +200,7 @@ module.exports = {
        * Handle SVG sprites.
        */
       {
-        test: utils.tests.svgs,
-        include: [
-          utils.srcImagesPath('sprite-svg'),
-        ],
+        test: utils.tests.spriteSvgs,
         use: [
           {
             loader: 'svg-sprite-loader',
@@ -227,7 +221,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: utils.filehashFilter,
+              name: file => `[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
               outputPath: 'fonts',
             },
           },
@@ -245,7 +239,7 @@ module.exports = {
    * Setup optimizations.
    */
   optimization: {
-    minimize: !env.isDebug,
+    minimize: env.minify,
   },
 
   /**

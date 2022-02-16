@@ -53,27 +53,26 @@ module.exports.distFontsPath = destPath =>
 module.exports.tests = {
   scripts: /\.(js|jsx)$/,
   styles: /\.(css|scss|sass)$/,
-  svgs: /\.svg$/,
-  images: /\.(ico|jpg|jpeg|png|svg|gif)$/,
-  fonts: /\.(eot|ttf|woff|woff2)$/,
+  spriteSvgs: /(resources|dist|node_modules)[\\/]images[\\/]sprite-svg[\\/].*\.svg$/,
+  images: /(resources|dist|node_modules)[\\/](?!images[\\/]sprite-svg|fonts).*\.(ico|jpg|jpeg|png|svg|gif)$/,
+  fonts: /(resources|dist|node_modules)[\\/](?!images[\\/]sprite-svg).*\.(eot|svg|ttf|woff|woff2)$/,
 };
 
 module.exports.detectEnv = () => {
-  const nodeEnv = process.env.NODE_ENV || 'development';
-  const wpemergeEnv = process.env.WPEMERGE_ENV || '';
-  const isCombined = !!process.env.WPEMERGE_COMBINED_BUILD;
-  const isDevelopment = nodeEnv === 'development';
-  const isHot = wpemergeEnv === 'hot';
-  const isProduction = nodeEnv === 'production';
-  const isDebug = wpemergeEnv === 'debug';
+  const env = process.env.NODE_ENV || 'development';
+  const isDev = env === 'development';
+  const isHot = env === 'hot';
+  const isDebug = env === 'debug';
+  const isProduction = env === 'production';
 
   return {
-    isCombined,
-    isDevelopment,
+    env,
+    isDev,
     isHot,
-    isProduction,
     isDebug,
-    filenameSuffix: isProduction && !isDebug ? '.min' : '',
+    isProduction,
+    minify: isProduction,
+    filenameSuffix: isDev || isProduction ? '.min' : '',
   };
 };
 
@@ -113,5 +112,3 @@ module.exports.filehash = (file) => {
   hash.update(fs.readFileSync(file));
   return hash.digest('hex');
 };
-
-module.exports.filehashFilter = file => `[name].${module.exports.filehash(file).substr(0, 10)}.[ext]`;

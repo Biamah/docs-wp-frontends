@@ -5,7 +5,7 @@ const url = require('url');
 const { ProvidePlugin, WatchIgnorePlugin } = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ManifestPlugin = require('webpack-assets-manifest');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const chokidar = require('chokidar');
 const get = require('lodash/get');
 
@@ -17,7 +17,6 @@ const configLoader = require('./config-loader');
 const spriteSmith = require('./spritesmith');
 const spriteSvg = require('./spritesvg');
 const postcss = require('./postcss');
-const DevelopmentModePlugin = require('./lib/development-mode-plugin');
 
 /**
  * Setup the environment.
@@ -26,7 +25,6 @@ const env = utils.detectEnv();
 const userConfig = utils.getUserConfig();
 const devPort = get(userConfig, 'development.port', 3000);
 const devHotUrl = url.parse(get(userConfig, 'development.hotUrl', 'http://localhost/').replace(/\/$/, ''));
-const hotUrl = `${devHotUrl.protocol}//${devHotUrl.host}:${devPort}/`;
 
 /**
  * Setup babel loader.
@@ -65,10 +63,8 @@ const plugins = [
   spriteSmith,
   spriteSvg,
   new ManifestPlugin({
-    writeToDisk: true,
-    publicPath: env.isHot ? hotUrl : null,
+    writeToFileEmit: true,
   }),
-  new DevelopmentModePlugin({ hot: env.isHot }),
 ];
 
 /**
@@ -87,7 +83,7 @@ module.exports = {
     ...require('./webpack/output'),
     ...(env.isHot
       // Required to work around https://github.com/webpack/webpack-dev-server/issues/1385
-      ? { publicPath: hotUrl }
+      ? { publicPath: `${devHotUrl.protocol}//${devHotUrl.host}:${devPort}/` }
       : {}
     ),
   },
@@ -161,14 +157,11 @@ module.exports = {
        */
       {
         test: utils.tests.images,
-        exclude: [
-          utils.srcImagesPath('sprite-svg'),
-        ],
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: utils.filehashFilter,
+              name: file => `[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
               outputPath: 'images',
             },
           },
@@ -179,10 +172,7 @@ module.exports = {
        * Handle SVG sprites.
        */
       {
-        test: utils.tests.svgs,
-        include: [
-          utils.srcImagesPath('sprite-svg'),
-        ],
+        test: utils.tests.spriteSvgs,
         use: [
           {
             loader: 'svg-sprite-loader',
@@ -202,7 +192,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: utils.filehashFilter,
+              name: file => `[name].${utils.filehash(file).substr(0, 10)}.[ext]`,
               outputPath: 'fonts',
             },
           },

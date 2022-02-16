@@ -1,8 +1,8 @@
 /*
-Theme Name: Ingenium
+Theme Name: WP Emerge Starter Theme
 Theme URI:
-Author: paulomfr
-Author URI: https://github.com/paulomfr
+Author: atanasangelovdev
+Author URI: https://wpemerge.com/
 Description:
 Tags:
 Version:
@@ -21,3 +21,9 @@ how to get the build process up & running.
 If you need to make a quick fix, feel free to add CSS
 below this comment - it will override the bundled styles.
 */
+
+.sticky {  }
+
+.gallery-caption {  }
+
+.bypostauthor {  }
