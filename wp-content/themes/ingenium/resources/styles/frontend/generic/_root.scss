@@ -12,4 +12,12 @@
   @each $key, $value in $font-sizes {
     --#{$variable-prefix}-font-size-#{$key}: #{px-to-rem($value)};
   }
+
+  /**
+   * Font weights.
+   *
+   */
+  @each $key, $value in $font-weights {
+    --#{$variable-prefix}-font-weight-#{$key}: #{$value};
+  }
 }

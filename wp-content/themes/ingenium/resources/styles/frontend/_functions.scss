@@ -66,6 +66,30 @@
   @return var(#{$css-variable}, #{$size-fallback});
 }
 
+/*
+ * Get font-weight from mapped value.
+ */
+@function font-weight($key, $weights: $font-weights) {
+  @return map.get($weights, $key);
+}
+
+/*
+ * Get a CSS font-weight variable.
+ */
+@function css-font-weight($key, $weights: $font-weights) {
+  $weight-fallback: font-weight($key, $weights);
+  $css-variable: --#{$variable-prefix}-font-weight-#{$key};
+
+  @return var(#{$css-variable}, #{$weight-fallback});
+}
+
+/*
+ * Set the line-height.
+ *
+ * @param {Pixel} $line-height - The line height in pixel.
+ * @param {Pixel} $font-size - The font size in pixel.
+ * @return {Float Number} - The divided value of $line-height / $font-size
+ */
 @function line-height($line-height, $font-size) {
   @return math.div($line-height, strip-unit($font-size));
 }
