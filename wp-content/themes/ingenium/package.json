@@ -27,7 +27,8 @@
     "i18n:pot": "wpi18n makepot --exclude=dist,node_modules,resources,tests,vendor --type=wp-theme --main-file=style.css --domain-path=languages/ --pot-file=my_app.pot --textdomain=my_app",
     "rebrand": "node resources/build/rebrand/rebrand.js",
     "release": "run-s build release:zip",
-    "release:zip": "node resources/build/release/release.js wpemerge-release"
+    "release:zip": "node resources/build/release/release.js wpemerge-release",
+    "postinstall": "cd ../../.. && husky install wp-content/themes/ingenium/.husky"
   },
   "browserslist": [
     "last 3 versions"
@@ -64,10 +65,13 @@
     "webpack-spritesmith": "^0.4.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
     "archiver": "^4.0.1",
     "chalk": "^4.0.0",
     "change-case": "^4.1.1",
     "chokidar-cli": "^3.0.0",
+    "commitizen": "^4.2.4",
     "eslint": "^8.9.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-plugin-import": "^2.20.2",
@@ -76,6 +80,7 @@
     "eslint-plugin-sonarjs": "^0.11.0",
     "eslint-plugin-unicorn": "^40.1.0",
     "glob": "^7.1.4",
+    "husky": "^7.0.4",
     "inquirer": "^7.1.0",
     "node-wp-i18n": "^1.2.1",
     "postcss": "^8.4.6",
@@ -84,5 +89,10 @@
     "stylelint": "^14.5.0",
     "stylelint-config-sass-guidelines": "^9.0.1",
     "webpack-dev-server": "^3.10.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "wp-content/themes/ingenium/node_modules/cz-conventional-changelog"
+    }
   }
 }
