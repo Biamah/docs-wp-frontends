@@ -3,5 +3,6 @@
     // Linters
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
+    "ikappas.phpcs"
   ]
 }

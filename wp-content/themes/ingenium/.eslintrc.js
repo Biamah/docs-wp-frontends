@@ -56,6 +56,7 @@ module.exports = {
         'case': 'camelCase',
       },
     ],
+    'unicorn/no-abusive-eslint-disable': 'off',
     'linebreak-style': 0,
     'id-length': [ 2, {
       min: 2,
