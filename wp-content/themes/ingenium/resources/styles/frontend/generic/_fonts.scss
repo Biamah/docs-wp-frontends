@@ -1,0 +1,34 @@
+/* ------------------------------------------------------------ *\
+  Fonts.
+  Add your custom fonts here. You can use a tool to convert your
+  fonts in to web format (woff, woff2). To do it you can use
+  https://transfonter.org
+\* ------------------------------------------------------------ */
+
+/**
+ *
+ * Gotham.
+ *
+ */
+@font-face {
+  font-display: swap;
+  font-family: 'Gotham';
+  font-style: normal;
+  font-weight: 500;
+  src: url('~@fonts/gotham/Gotham-Black.woff2') format('woff2'),
+    url('~@fonts/gotham/Gotham-Black.woff') format('woff');
+}
+
+/**
+ *
+ * Futura.
+ *
+ */
+@font-face {
+  font-display: swap;
+  font-family: 'Futura Md BT';
+  font-style: normal;
+  font-weight: 500;
+  src: url('~@fonts/futura/FuturaBT-Medium.woff2') format('woff2'),
+    url('~@fonts/futura/FuturaBT-Medium.woff') format('woff');
+}
