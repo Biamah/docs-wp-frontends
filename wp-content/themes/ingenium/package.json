@@ -68,12 +68,11 @@
     "glob": "^7.1.4",
     "inquirer": "^7.1.0",
     "node-wp-i18n": "^1.2.1",
+    "postcss": "^8.4.6",
     "replace-in-file": "^6.0.0",
     "shelljs": "^0.8.3",
-    "stylelint": "^13.3.3",
-    "stylelint-config-recommended-scss": "^4.2.0",
-    "stylelint-order": "^4.0.0",
-    "stylelint-scss": "^3.17.1",
+    "stylelint": "^14.5.0",
+    "stylelint-config-sass-guidelines": "^9.0.1",
     "webpack-dev-server": "^3.10.3"
   }
 }
