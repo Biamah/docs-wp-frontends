@@ -45,7 +45,7 @@ $body-color: #222;
   Font families, font sizes, line heights...
 \* ------------------------------------------------------------ */
 $font-family-serif: serif;
-$font-family-sans-serif: 'Futura';
+$font-family-sans-serif: sans-serif;
 
 // Uncomment the line below to define the font-family base of the website.
 // $font-family-base: var(--#{$variable-prefix}font-sans-serif);
@@ -71,11 +71,22 @@ $h5-font-size: $font-size-xs;
 // because he generate each font-size variable.
 $font-sizes: $font-size;
 
-$font-weight: (
+$font-weights: (
   'thin': 100,
-  'x-light': 300,
+  'hairline': 100,
+  'extra-light': 200,
+  'ultra-light': 200,
+  'light': 300,
   'regular': 400,
+  'normal': 400,
+  'medium': 500,
+  'semi-bold': 600,
+  'demi-bold': 600,
   'bold': 700,
+  'extra-bold': 800,
+  'ultra-bold': 800,
+  'black': 900,
+  'heavy': 900,
 );
 
 /* ------------------------------------------------------------ *\
