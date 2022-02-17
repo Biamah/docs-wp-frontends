@@ -1,0 +1,12 @@
+/**
+ *
+ * Figure.
+ *
+ */
+.c-figure {
+  margin: 0;
+
+  img {
+    @extend %img-responsive;
+  }
+}

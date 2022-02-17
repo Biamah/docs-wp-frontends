@@ -198,3 +198,8 @@
     }
   }
 }
+
+@mixin remove-link-appearance() {
+  color: inherit;
+  text-decoration: none;
+}

@@ -1,0 +1,17 @@
+/**
+ *
+ * Loop cards.
+ *
+ */
+.c-loop-cards {
+  @include list-unstyled;
+
+  @include media-breakpoint-up(lg) {
+    align-items: flex-start;
+    display: flex;
+
+    &__item:not(:first-child) {
+      margin-left: 8.8rem;
+    }
+  }
+}

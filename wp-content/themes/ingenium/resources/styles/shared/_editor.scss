@@ -4,11 +4,11 @@
  * @see resources/styles/shared/_variables.scss
  */
 @each $name, $value in $color {
-  .has-#{$name}-color {
+  .has-#{"" +$name}-color {
     color: $value;
   }
 
-  .has-#{$name}-background-color {
+  .has-#{"" +$name}-background-color {
     background-color: $value;
   }
 }

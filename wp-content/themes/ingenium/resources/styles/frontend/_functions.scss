@@ -91,5 +91,5 @@
  * @return {Float Number} - The divided value of $line-height / $font-size
  */
 @function line-height($line-height, $font-size) {
-  @return math.div($line-height, strip-unit($font-size));
+  @return math.div(strip-unit($line-height), strip-unit($font-size));
 }
