@@ -9,9 +9,14 @@
   @include media-breakpoint-up(lg) {
     align-items: flex-start;
     display: flex;
+  }
 
-    &__item:not(:first-child) {
+  &__item:not(:first-child) {
+    margin-top: 5rem;
+
+    @include media-breakpoint-up(lg) {
       margin-left: 8.8rem;
+      margin-top: 0;
     }
   }
 }

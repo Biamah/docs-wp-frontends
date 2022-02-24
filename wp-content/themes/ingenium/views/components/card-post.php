@@ -21,7 +21,7 @@
 
 		<h2 class="c-card-post__title c-title c-title--h3">
 			<a href="#permalink">
-				<?php echo esc_html( $title ); ?>
+				My card title
 			</a>
 		</h2>
 

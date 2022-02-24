@@ -15,28 +15,11 @@
  * @package MyApp
  */
 
-$total_cards = 3;
-$last_posts = [
-	[
-		'title' => 'Nailan'
-	],
-	[
-		'title' => 'Guilherme'
-	],
-	[
-		'title' => 'Alefy px-to-rem'
-	],
+$blocks = [
+	'features',
+	'last-posts',
 ];
-?>
 
-<section class="b-last-posts">
-	<div class="container">
-		<ul class="c-loop-cards c-loop-cards--<?php echo esc_html( $total_cards ); ?>">
-			<?php foreach( $last_posts as $card ) : ?>
-				<li class="c-loop-cards__item">
-					<?php my_app_template( 'views/components/card-post', $card ); ?>
-				</li>
-			<?php endforeach; ?>
-		</ul>
-	</div>
-</section>
+foreach ( $blocks as $block ) {
+	my_app_template( "views/blocks/{$block}" );
+}

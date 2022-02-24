@@ -1,0 +1,21 @@
+/**
+ *
+ * Feature.
+ *
+ */
+
+.c-feature {
+  max-width: 33.2rem;
+  text-align: center;
+
+  &__thumbnail {
+    margin-bottom: 3.2rem;
+    max-width: 12rem;
+    width: 100%;
+  }
+
+  .c-title {
+    color: css-color('text-dark');
+    margin-bottom: 1rem;
+  }
+}
