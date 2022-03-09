@@ -173,7 +173,7 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                outputStyle: env.isDebug ? 'compact' : 'compressed',
+                outputStyle: env.isDebug ? null : 'compressed',
               },
             },
           },
