@@ -59,6 +59,7 @@
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "svg-sprite-loader": "^4.2.5",
+    "swiper": "^8.0.6",
     "webpack": "^4.26.1",
     "webpack-cli": "^3.1.2",
     "webpack-manifest-plugin": "^2.0.4",

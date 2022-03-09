@@ -1,0 +1,29 @@
+/**
+ *
+ * Features.
+ *
+ */
+
+.b-hero {
+  background: #ddd;
+  padding-top: 105px;
+
+  &__content {
+    @include center-block(84rem);
+    color: css-color('white');
+    text-align: center;
+
+    .c-text,
+    .c-btn {
+      margin-top: 3rem;
+    }
+  }
+
+  .c-background__body {
+    @include media-breakpoint-up(lg) {
+      @include flex-center;
+      height: 100vh;
+      min-height: 800px;
+    }
+  }
+}

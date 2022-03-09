@@ -1,0 +1,17 @@
+/**
+ *
+ * Background.
+ *
+ */
+.c-background {
+  position: relative;
+
+  &__image {
+    @include background;
+    @include position-fill;
+  }
+
+  &__body {
+    position: relative;
+  }
+}

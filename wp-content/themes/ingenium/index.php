@@ -16,6 +16,7 @@
  */
 
 $blocks = [
+	'hero',
 	'features',
 	'last-posts',
 ];
